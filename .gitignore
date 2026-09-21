@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.pnpm-store/
+.DS_Store
+*.log
+PERSONAL-CONTENT-*.md
+ARCHITECTURE.md
+.env

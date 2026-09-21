@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import TagList from '../../components/TagList.astro';
+import { getCollection } from 'astro:content';
+import { sortPosts, formatDate } from '../../utils/content';
+const posts = sortPosts(await getCollection('blog'));
+---
+<BaseLayout title="Blog" description="Technical notes, learning reflections, and engineering experiences."><div class="mx-auto max-w-5xl px-5 py-20 lg:px-8 lg:py-28"><SectionHeading eyebrow="Writing" title="Notes from the workbench." description="Technical notes and lessons learned while building products, systems, and a better engineering practice." /><div class="divide-y divide-line border-y border-line">{posts.map((post) => <article class="py-8 first:pt-0 last:pb-0"><div class="flex flex-wrap items-center gap-3 text-sm text-muted"><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time><span aria-hidden="true">·</span><span>{post.data.tags.join(' · ')}</span></div><h2 class="mt-3 text-2xl font-semibold tracking-tight"><a href={`/blog/${post.id}/`} class="hover:text-accent">{post.data.title}</a></h2><p class="mt-3 max-w-2xl leading-7 text-muted">{post.data.description}</p><div class="mt-4"><TagList tags={post.data.tags} /></div></article>)}</div></div></BaseLayout>

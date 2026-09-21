@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { profile } from '../data/profile';
+import { experiences } from '../data/portfolio';
+---
+<BaseLayout title={`关于我 — ${profile.name}`} description={`${profile.name} 的工程经历与职业方向。`}>
+  <div class="mx-auto max-w-6xl px-5 py-20 lg:px-8 lg:py-28">
+    <SectionHeading eyebrow="关于我" title="从设备软件开发，继续走向边缘与云。" description="我关注可维护的模块设计、清晰的工程交付，以及能够真正减少重复劳动的工具。" />
+    <div class="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
+      <aside class="rounded-2xl border border-line bg-surface p-6"><p class="font-mono text-sm text-accent">{profile.role}</p><p class="mt-4 leading-7 text-muted">{profile.location}</p><p class="mt-6 leading-7 text-muted">我在 Windows 环境下使用 C++20、MFC 和公司封装的 SGAPI 参与嵌入式设备模拟与专业设备图形化应用开发，负责业务模块从需求理解、设计、编码到测试和缺陷修正的完整过程。当前正在补齐 HTTP、REST、数据库、消息队列、Docker、Kubernetes 和可观测性，为边缘 / IoT 与云平台方向做准备。</p></aside>
+      <div><h2 class="text-xl font-semibold">成长经历</h2><div class="mt-6 space-y-8">{experiences.map((item) => <article class="border-l border-line pl-6"><p class="font-mono text-xs text-accent">{item.period}</p><h3 class="mt-2 text-lg font-medium">{item.title}</h3><p class="mt-1 text-sm text-muted">{item.organization}</p><p class="mt-3 leading-7 text-muted">{item.description}</p></article>)}</div></div>
+    </div>
+  </div>
+</BaseLayout>

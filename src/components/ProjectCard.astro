@@ -1,0 +1,6 @@
+---
+interface Props { project: { slug: string; title: string; description: string; category: string; stack: string[]; github?: string; demo?: string } }
+import { sitePath } from '../utils/paths';
+const { project } = Astro.props;
+---
+<article class="group flex h-full flex-col rounded-2xl border border-line bg-surface p-6 transition hover:-translate-y-1 hover:border-copy/40"><div class="mb-6 flex items-start justify-between gap-4"><span class="font-mono text-xs text-accent">{project.category}</span><span class="text-muted transition group-hover:text-copy" aria-hidden="true">↗</span></div><h3 class="text-xl font-semibold tracking-tight">{project.title}</h3><p class="mt-3 flex-1 leading-7 text-muted">{project.description}</p><div class="mt-6 flex flex-wrap gap-2">{project.stack.map((item) => <span class="rounded-full bg-page px-3 py-1 font-mono text-xs text-muted">{item}</span>)}</div><div class="mt-6 flex gap-4 text-sm"><a href={sitePath(`/projects/${project.slug}/`)} class="font-medium text-copy hover:text-accent">Case study</a>{project.github && <a href={project.github} class="text-muted hover:text-copy">GitHub</a>}</div></article>

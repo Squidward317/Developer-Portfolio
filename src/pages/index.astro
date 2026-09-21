@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/profile';
+import SectionHeading from '../components/SectionHeading.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { skillGroups, projects } from '../data/portfolio';
+import { sitePath } from '../utils/paths';
+---
+<BaseLayout>
+  <section class="mx-auto max-w-6xl px-5 py-24 lg:px-8 lg:py-36">
+    <img src={profile.avatar} alt={`${profile.name} avatar placeholder`} width="80" height="80" class="mb-8 h-20 w-20 rounded-full border border-line" loading="eager" />
+    <p class="mb-5 font-mono text-sm text-accent">你好，我是</p>
+    <h1 class="max-w-3xl text-4xl font-semibold tracking-tight sm:text-6xl">{profile.name}<span class="text-accent">.</span></h1>
+    <p class="mt-6 max-w-2xl text-xl text-muted">{profile.role}</p>
+    <p class="mt-5 max-w-xl leading-7 text-muted">{profile.bio}</p>
+    <div class="mt-8 flex flex-wrap gap-3"><a class="rounded-lg bg-copy px-5 py-3 text-sm font-medium text-page transition hover:opacity-85" href={sitePath('/projects/')}>查看项目</a><a class="rounded-lg border border-line px-5 py-3 text-sm font-medium transition hover:border-copy" href={sitePath('/blog/')}>阅读博客</a><a class="rounded-lg border border-line px-5 py-3 text-sm font-medium transition hover:border-copy" href={profile.github}>GitHub ↗</a></div>
+  </section>
+  <section class="border-t border-line"><div class="mx-auto max-w-6xl px-5 py-20 lg:px-8"><SectionHeading eyebrow="技术能力" title="把设备软件做得可靠、可维护。" /><div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{skillGroups.map((group) => <div class="rounded-2xl border border-line bg-surface p-5"><h3 class="font-medium">{group.title}</h3><p class="mt-4 text-sm leading-7 text-muted">{group.items.join(' · ')}</p></div>)}</div></div></section>
+  <section><div class="mx-auto max-w-6xl px-5 py-20 lg:px-8"><div class="flex items-end justify-between gap-5"><SectionHeading eyebrow="代表项目" title="用工程实践解决真实问题。" /><a class="mb-10 text-sm text-muted hover:text-copy" href={sitePath('/projects/')}>查看全部 →</a></div><div class="grid gap-5 md:grid-cols-2">{projects.filter((project) => project.featured).map((project) => <ProjectCard project={project} />)}</div></div></section>
+</BaseLayout>

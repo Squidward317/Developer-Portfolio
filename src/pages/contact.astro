@@ -1,0 +1,6 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { profile, socialLinks } from '../data/profile';
+---
+<BaseLayout title={`Contact — ${profile.name}`} description={`Contact ${profile.name} about engineering opportunities and collaboration.`}><div class="mx-auto max-w-4xl px-5 py-20 lg:px-8 lg:py-28"><SectionHeading eyebrow="Contact" title="Let’s build something useful." description="For roles, collaborations, or a thoughtful technical conversation, the quickest way to reach me is email." /><div class="grid gap-4 sm:grid-cols-2">{socialLinks.map((link) => <a href={link.href} class="rounded-2xl border border-line bg-surface p-6 transition hover:-translate-y-1 hover:border-copy"><span class="font-mono text-xs text-accent">{link.label}</span><span class="mt-3 block text-lg font-medium">{link.label === 'Email' ? profile.email : link.href.replace('https://', '')} ↗</span></a>)}</div></div></BaseLayout>

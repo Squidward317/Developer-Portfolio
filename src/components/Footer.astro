@@ -1,0 +1,9 @@
+---
+import { profile, socialLinks } from '../data/profile';
+---
+<footer class="border-t border-line">
+  <div class="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between lg:px-8">
+    <p>© {new Date().getFullYear()} {profile.name}. Built with Astro.</p>
+    <div class="flex gap-4">{socialLinks.map((link) => <a class="transition hover:text-copy" href={link.href}>{link.label}</a>)}</div>
+  </div>
+</footer>

@@ -1,0 +1,15 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TagList from '../components/TagList.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import { formatDate } from '../utils/content';
+import { sitePath } from '../utils/paths';
+interface Props { title: string; description: string; date: Date; tags: string[]; headings: { depth: number; slug: string; text: string }[] }
+const { title, description, date, tags, headings } = Astro.props;
+---
+<BaseLayout title={`${title} — Blog`} description={description}>
+  <article class="mx-auto max-w-6xl px-5 py-20 lg:px-8 lg:py-28">
+    <header class="mx-auto max-w-3xl"><a href={sitePath('/blog/')} class="font-mono text-sm text-muted hover:text-copy">← All posts</a><p class="mt-12 font-mono text-sm text-accent">{formatDate(date)}</p><h1 class="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">{title}</h1><p class="mt-6 text-xl leading-8 text-muted">{description}</p><div class="mt-6"><TagList tags={tags} /></div></header>
+    <div class="mt-14 grid gap-12 lg:grid-cols-[1fr_240px]"><div class="prose max-w-none text-copy prose-headings:scroll-mt-24 prose-headings:font-semibold prose-p:leading-8 prose-p:text-muted prose-a:text-accent prose-code:rounded prose-code:bg-page prose-code:px-1 prose-code:py-0.5 prose-pre:overflow-x-auto prose-pre:rounded-xl prose-pre:border prose-pre:border-line prose-pre:bg-[#111] prose-pre:p-5 prose-li:text-muted"> <slot /></div><aside class="hidden lg:block"><div class="sticky top-8"><TableOfContents headings={headings} /></div></aside></div>
+  </article>
+</BaseLayout>

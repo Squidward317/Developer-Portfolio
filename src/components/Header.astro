@@ -1,0 +1,26 @@
+---
+import { navigation } from '../data/navigation';
+import { profile } from '../data/profile';
+import ThemeToggle from './ThemeToggle.astro';
+import { sitePath } from '../utils/paths';
+const pathname = Astro.url.pathname;
+---
+<header class="border-b border-line bg-page/90 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 lg:px-8">
+    <a href={sitePath('/')} class="font-mono text-sm font-semibold tracking-tight text-copy" aria-label={`${profile.name} home`}>
+      {profile.shortName}<span class="text-accent">.</span>
+    </a>
+    <div class="flex items-center gap-4">
+      <details class="relative md:hidden">
+        <summary class="cursor-pointer list-none rounded-lg border border-line px-3 py-2 text-sm text-muted" aria-label="Open navigation">Menu</summary>
+        <nav aria-label="Mobile navigation" class="absolute right-0 top-12 z-10 flex min-w-40 flex-col gap-1 rounded-xl border border-line bg-surface p-2 shadow-lg">
+          {navigation.map((item) => <a href={sitePath(item.href)} class="rounded-lg px-3 py-2 text-sm text-muted hover:bg-page hover:text-copy">{item.label}</a>)}
+        </nav>
+      </details>
+      <nav aria-label="Main navigation" class="hidden items-center gap-5 md:flex">
+        {navigation.map((item) => <a href={sitePath(item.href)} class:list={["text-sm transition hover:text-copy", pathname.startsWith(sitePath(item.href)) ? "text-copy" : "text-muted"]}>{item.label}</a>)}
+      </nav>
+      <ThemeToggle />
+    </div>
+  </div>
+</header>

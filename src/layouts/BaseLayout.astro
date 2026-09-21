@@ -1,0 +1,28 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import { profile } from '../data/profile';
+import { sitePath } from '../utils/paths';
+interface Props { title?: string; description?: string; }
+const { title = profile.role, description = profile.bio } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://Squidward317.github.io');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href={sitePath('/favicon.svg')} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content="website" /><meta property="og:url" content={canonical} />
+    <script is:inline>document.documentElement.classList.toggle('dark', localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && matchMedia('(prefers-color-scheme: dark)').matches));</script>
+  </head>
+  <body class="min-h-screen antialiased">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-copy focus:px-3 focus:py-2 focus:text-page">Skip to content</a>
+    <Header /><main id="main-content" class="page-enter"><slot /></main><Footer />
+  </body>
+</html>

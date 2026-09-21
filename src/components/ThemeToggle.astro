@@ -1,0 +1,14 @@
+<button id="theme-toggle" type="button" class="rounded-lg border border-line p-2 text-muted transition hover:border-copy hover:text-copy" aria-label="Toggle color theme">
+  <span aria-hidden="true">◐</span>
+</button>
+
+<script is:inline>
+  const button = document.querySelector('#theme-toggle');
+  const root = document.documentElement;
+  const stored = localStorage.getItem('theme');
+  if (stored === 'dark' || (!stored && matchMedia('(prefers-color-scheme: dark)').matches)) root.classList.add('dark');
+  button?.addEventListener('click', () => {
+    const dark = root.classList.toggle('dark');
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  });
+</script>

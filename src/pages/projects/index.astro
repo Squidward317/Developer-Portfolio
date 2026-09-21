@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/portfolio';
+---
+<BaseLayout title="Projects" description="Selected engineering projects and technical outcomes."><div class="mx-auto max-w-6xl px-5 py-20 lg:px-8 lg:py-28"><SectionHeading eyebrow="Projects" title="Work with a clear point of view." description="A growing collection of products, experiments, and systems. Each project will eventually include context, contribution, and measurable results." /><div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{projects.map((project) => <ProjectCard project={project} />)}</div></div></BaseLayout>
